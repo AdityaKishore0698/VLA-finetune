@@ -31,3 +31,21 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M1-10 · undeclared direct torch import in trainer.py / run_dir.py
 - M1-11 · pyproject author/URL point to another person/repo
 - WITHDRAWN · .venv-vla not gitignored — venvs live in ../, not a gap
+
+## Module 2
+- M2-1 · schema.py · no extra="forbid"; typos vanish incl. from resolved record · P0
+- M2-2 · schema.py/runner.py · training.model free str; non-"smolvla" silently skips training, exit 0 · P0
+- M2-3 · schema.py · num_workers, mixed_precision, success_tolerance dead; API_REFERENCE overclaims success_tolerance (= S4)
+- M2-4 · schema.py/interventions.py · imbalanced with variable but no/str-typed variable_value → full-data run labelled imbalanced · P0
+- M2-5 · schema.py · experiment_id/created_at user-settable despite "not user-editable" comment + API_REFERENCE
+- M2-6 · schema.py · experiment_id not content-addressed; no config_hash (= S14 refined)
+- M2-7 · schema.py:150 · stale `experiments.selection` citation (= S3)
+- M2-8 · schema.py · split fractions unbounded; val=0 disables selection silently
+- M2-9 · loader.py · base found by directory convention; no --base CLI flag though configs/smolvla/so100_pickplace.yaml says so; single base only; file is dead
+- M2-10 · schema.py vs base.yaml · two disagreeing default sources
+- M2-11 · baseline_extended.yaml · dated CWD-relative git-ignored resume path
+- M2-12 · schema.py · flat intervention accepts kind-irrelevant fields
+- M2-13 · schema.py + interventions.py · 0.5 default duplicated
+- M2-14 · selection_metric free str; unknown metric → silent fallback to final
+- M2-15 · oversample_factor / episode_weights unbounded (≤0 accepted)
+- M2-16 · "identical test set" across baseline/extended relies on deterministic DatasetBuilder; unverified in-repo
