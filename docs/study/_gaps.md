@@ -208,3 +208,15 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M12-14 · scripts wrappers redundant with python -m, partial (7/11), scripts/test.py shadows stdlib test · P2
 - M12-15 · no CLI tests · P1
 - M12-16 · rollout duplicate untimestamped records · P2
+
+## Module 13
+- M13-1 · tests · no cross-stage invariant tests (val-only selection, seed propagation, slice reconciliation, artifact agreement) · P1
+- M13-2 · conftest + test_evaluation_offline · uniform lengths + ~2-ep test split → per_length_bucket branch almost certainly skipped; test name overclaims · P2
+- M13-3 · tests pinning wrong behaviour: zero-fraction helper, empty-safetensors health check, "deterministic" experiment_id · P2
+- M13-4 · untested: CLI, reports, sweep, _prune_checkpoints, crash.json, DeployedModel.load/predict, registry ordering · P1
+- M13-5 · suite needs sibling engine; smoke needs Hub + torch; no CI possible as configured (= M1-5) · P1
+- M13-6 · function-scoped fixtures rebuild ingest/QC/build per test · P2
+- M13-7 · global set_settings in fixture · P2
+- M13-8 · smoke asserts existence not value sanity in eval · P2
+- M13-9 · smoke imports private rde functions (= M1-4) · P2
+- CAPSTONE written in 13.6
