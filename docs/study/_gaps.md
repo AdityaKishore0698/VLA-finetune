@@ -140,3 +140,17 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M8-9 · affected_slice always whole split · P2
 - M8-10 · thresholds not configurable · P2
 - M8-11 · integration test checks shape only; dead branches untested · P2
+
+## Module 9
+- M9-1 · loader.py:63-89 · health_check never compares ckpt meta vs contract (action_dim, cameras, dataset) despite "any mismatch" docstring (= S8) · P1
+- M9-2 · loader.py:82-87 · normalization check on contract; inference uses checkpoint preprocessor (from_checkpoint contract=None) → wrong object; real skew unchecked · P1
+- M9-3 · loader.py:97 · predict takes engine Sample → replay harness, not robot deployment · P1 (framing) / roadmap
+- M9-4 · DeployedModel.load/predict never executed anywhere (tests only health_check) · P1
+- M9-5 · loader.py:109-110 · postprocessing_ms = wrapper overhead (postprocessor inside predict); total is a sum; clamp hides negatives; GPU sync unverified · P2
+- M9-6 · registry.py · catalogue not registry (no stages/promotion); unwired (documented) · P2
+- M9-7 · artifact.py:69 · metrics = test, labelled "what metrics justified selection" (DEPLOYMENT.md T2, registry docstring); val metric absent · P1
+- M9-8 · artifact.py · model_version always step; pretrained_model may be resume path (unverified); model_id prefix from free tag · P2
+- M9-9 · DEPLOYMENT.md §5 · says predict uses select_action; API_REFERENCE + smoke test say predict_action_chunk · P2 (doc)
+- M9-10 · test_deployment.py · health-check tests pass empty safetensors + mismatched meta (encodes presence-only) · P2
+- M9-11 · registry "most recent wins" untested · P2
+- M9-12 · LatencyBreakdown.note names VisionStateAdapter, class uses VisionLanguageAdapter · P2 (trivial)
