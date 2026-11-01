@@ -82,3 +82,17 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M4-13 · weights recorded for val/test episodes too · P2
 - M4-14 · QC filtering at build (unverified) may make dataset.json episode_ids overstate pool · unverified
 - DOC (for M10): EXPERIMENTS.md §7 claims `mtrain compare` reports mean/std across seeds — no aggregation code exists
+
+## Module 5
+- M5-1 · split_integrity.py · overlap check near-tautological (split = single attribute/episode); failure branch only reachable via fake · P2 (claim downgrade)
+- M5-2 · split_integrity.py:28 · ok ignores unassigned, empty splits, sizes vs config → real failures pass · P1
+- M5-3 · no content-level (near-duplicate/same-session) leakage detection · P2 (limitation; README NN-tie evidence)
+- M5-4 · profile.py:45-53 · normalized entropy divides by log2(#occupied bins) → evenness not coverage; bimodal 2-bin = 1.0; methodology text + module docstring overclaim · P1 · fix: log2(_HIST_BINS)
+- M5-5 · profile.py:258 · episode_length_cv = range/mean (~4.5× CV at n=48); convoluted and-guard (= S10) · P2
+- M5-6 · runner→profile · profile over training_version = train∪val∪test, not train split · P2
+- M5-7 · profile.py · coupled to undocumented explorer dict keys · P2
+- M5-8 · profile.py:112 · clamp folds out-of-range values into edge bins; NULLs dropped unreported · P2
+- M5-9 · task entropy duplicated as instruction diversity · P2
+- M5-10 · profile.py:181-187 · misleading "not a training version" note after exception; "unassigned" kept as 4th split when partially assigned · P2
+- M5-11 · to_dict hand-listed · P2
+- M5-12 · parent_version first input only · P2
