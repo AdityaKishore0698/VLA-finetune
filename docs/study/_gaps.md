@@ -65,3 +65,20 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M3-12 · half the artifacts bypass RunDir · P2
 - M3-13 · runs/experiments default from parents[3] → inside site-packages for wheel install (latent) · P2
 - M1-11 UPDATED: README:298 credits SO-100 runs to AdityaKishore0698, ALOHA to chytra3
+
+## Module 4
+- M4-1 · interventions.py:195 · filter-then-split → each excluding intervention has its own smaller test set; imbalanced test lacks removed regime; feedback's "compare on same fixed test slice" impossible · P0 (design) · fix: split once, intervene on train only
+- M4-2 · interventions.py:88-91/181 · frac=0.0 resolver returns [] but builder raises; unit test tests helper only (= S6) · P1
+- M4-3 · interventions.py:97/100 · imbalanced = total removal, not under-representation (config template says under-represent) · P2 (doc/semantics)
+- M4-4 · interventions.py:47 vs offline.py:171 · whole-dataset vs within-split terciles; "same as profile.py" false — profile has none (= S11) · P1
+- M4-5 · interventions.py:56 · ties (<= t1) collapse buckets; uniform-length data → imbalanced long/medium silently full · P2
+- M4-6 · interventions.py:91 · fraction draws not nested across fractions · P2
+- M4-7 · explicit episode_ids/weights unvalidated (unknown ids, dupes, ≤0) · P2
+- M4-8 · EXPERIMENTS.md §4 · "every report states rebalanced limitation" — false, not in code · P1 (doc)
+- M4-9 · EXPERIMENTS.md §6 · dataset.json does not record test membership; only predictions file does · P2
+- M4-10 · next_version not atomic; orphans on failure; identical requests mint new versions · P2
+- M4-11 · module docstring says task_id is the one grouping key — stale · P2
+- M4-12 · misleading rebalanced error for unsupported variable · P2
+- M4-13 · weights recorded for val/test episodes too · P2
+- M4-14 · QC filtering at build (unverified) may make dataset.json episode_ids overstate pool · unverified
+- DOC (for M10): EXPERIMENTS.md §7 claims `mtrain compare` reports mean/std across seeds — no aggregation code exists
