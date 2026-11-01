@@ -96,3 +96,19 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M5-10 · profile.py:181-187 · misleading "not a training version" note after exception; "unassigned" kept as 4th split when partially assigned · P2
 - M5-11 · to_dict hand-listed · P2
 - M5-12 · parent_version first input only · P2
+
+## Module 6
+- M6-1 · trainer.py:99 · selection on 32 val frames (likely first frames of one episode — unverified), stochastic policy, min over 10–20 → README val 0.0018 vs test 0.0239 (13×) · P0 · fix: frozen stratified val subset, avg samples (= S9)
+- M6-2 · trainer.py:184 · except Exception misses KeyboardInterrupt/SIGTERM/SIGKILL; comment claims SIGTERM · P1
+- M6-3 · trainer.py:228 · silent fallback best→final, no limitation recorded · P1
+- M6-4 · trainer.py:163-170 · NaN first val metric locks best forever (needs isfinite) · P1
+- M6-5 · cadence alignment (ckpt % val) unchecked → selection silently disabled · P2
+- M6-6 · trainer.py:82-85 · resume not checked vs dataset; load before verify · P2
+- M6-7 · optimizer state never saved/restored though fit reportedly accepts/returns it · P2
+- M6-8 · trainer.py:208 · final duplicates step_N when aligned; unverified; unvalidated; outside try · P2
+- M6-9 · verify_checkpoint presence-only; comment's kill-mid-write threat not catchable in-process · P2
+- M6-10 · _prune_checkpoints untested; failed rmtree marked pruned; corrupt ckpts occupy keep slots; keep<=0 = keep all · P2
+- M6-11 · crash-path del/empty_cache can't free traceback-pinned memory (comment misdescribes) · P2
+- M6-12 · peak_gpu_mb = allocator peak post-load; understates provisioning · P2
+- M6-13 · empty-train guard after model load · P2
+- M6-14 · grad_accum step semantics unknown · unverified
