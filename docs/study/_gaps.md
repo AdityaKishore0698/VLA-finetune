@@ -112,3 +112,18 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M6-12 · peak_gpu_mb = allocator peak post-load; understates provisioning · P2
 - M6-13 · empty-train guard after model load · P2
 - M6-14 · grad_accum step semantics unknown · unverified
+
+## Module 7
+- M7-1 · offline.py:150-185 · slices re-run stochastic inference; non-reconciling; ~3× inference on SO-100; fix: slice overall.outcomes · P1
+- M7-2 · README §2.2 · "long episodes easier" from 1–2 episodes/slice — below resolution · P1 (claim downgrade)
+- M7-3 · no uncertainty anywhere (bootstrap over episodes from test_outcomes.jsonl; seeds) · P1
+- M7-4 · NN baseline = state-only retrieval; tie is key interpretive fact (not a bug) · framing
+- M7-5 · offline.py:79-80 · per-episode "mse"/"rmse" = squared per-frame MAE (disclosed only in METRICS.md) · P2
+- M7-6 · base.yaml · per_task kept for single-task SO-100 (aloha config removes as redundant) · P2 (trivial)
+- M7-7 · METRICS.md §2 · claims evaluate_baselines computes ratios — it doesn't · P2 (doc)
+- M7-8 · offline.py:170 · length slices silently skipped < 3 episodes, no note · P2
+- M7-9 · offline.py:108 · temporal_error assumes contiguous frame_index · P2
+- M7-10 · baselines unweighted in rebalanced runs · P2
+- M7-11 · error_distribution omits frame count despite METRICS.md · P2
+- M7-12 · success_tolerance accepted by Evaluator.evaluate (per API doc) but never passed — one-line wire-up (= S4/M2-3)
+- M7-13 · EXPERIMENTS.md §6 "frozen slice" true per version only; cut points depend on test lengths · P2 (doc)
