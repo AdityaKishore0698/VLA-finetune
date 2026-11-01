@@ -190,3 +190,21 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M11-14 · eval from_checkpoint ignores training.device; eval policy not released · P2
 - M11-15 · same view as train & val; two-view seam unused · note
 - PATCHED M1 table: run_data_fraction_sweep has no tests
+
+## Module 12
+- M12-1 · cli.py evaluate · overwrites test_overall.json/stratified.json in place, stochastic, no history (= S7) · P0 · fix: versioned rescore dir
+- M12-2 · cli.py evaluate + API_REFERENCE §4.5/§9.3 · --split val writes val into test_overall.json; doc recommends it · P0
+- M12-3 · cli.py evaluate · divergent re-impl: no baselines (docstring claims), slices hard-coded per_task, default batch, no update of predictions/summary/report/card/artifact/feedback · P1 · fix: factor runner stage 4
+- M12-4 · cli.py build-intervention · safe_dump erases template comments, reflows folded strings · P1 · fix: ruamel / separate file
+- M12-5 · cli.py:269 · imbalanced written as kind: custom → label lost · P2
+- M12-6 · build-intervention imbalanced w/o --variable-value → all episodes (= M2-4) · P1
+- M12-7 · _target_episodes duplicated (cli vs interventions.py) · P2
+- M12-8 · resolution --version not checked vs config dataset.version · P2
+- M12-9 · export omits git.json/environment.json/reports/predictions; tables/ empty; manifest.json never exists · P1
+- M12-10 · validate/analyze-failures misdiagnose crashed runs · P2
+- M12-11 · scripts/compare.py docstring `--runs a b c` invalid for Typer list option · P2 trivial
+- M12-12 · no --base/--force/seed loop/report/sweep commands; --seed help silent · P2
+- M12-13 · inspect --version default training/v1 arbitrary · P2
+- M12-14 · scripts wrappers redundant with python -m, partial (7/11), scripts/test.py shadows stdlib test · P2
+- M12-15 · no CLI tests · P1
+- M12-16 · rollout duplicate untimestamped records · P2
