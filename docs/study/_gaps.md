@@ -127,3 +127,16 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M7-11 · error_distribution omits frame count despite METRICS.md · P2
 - M7-12 · success_tolerance accepted by Evaluator.evaluate (per API doc) but never passed — one-line wire-up (= S4/M2-3)
 - M7-13 · EXPERIMENTS.md §6 "frozen slice" true per version only; cut points depend on test lengths · P2 (doc)
+
+## Module 8
+- M8-1 · runner→feedback · feedback runs on TEST; curation loop tunes on test (adaptive overfitting) · P0 (method) · fix: run on full val eval
+- M8-2 · artifact.py:35-66 · p90 threshold always flags ~10% → reviews always non-empty → "no action" unreachable · P1 · fix: absolute/baseline-relative gate
+- M8-3 · artifact.py:43 · failure_rate>0.5 unreachable (max ≈0.50 SO-100, 0.40 ALOHA) → defect branch dead · P1 · fix: base-rate-relative/binomial
+- M8-4 · artifact.py:64-72 · recommendation fixed template with blank placeholders; FAILURE_ANALYSIS §6 overclaims · P2
+- M8-5 · FAILURE_ANALYSIS.md §4 · claims predictions deterministic — contradicts README §2.3 stochastic · P1 (doc)
+- M8-6 · FAILURE_ANALYSIS.md §3 · per-dim per-episode via episode_metrics — not implemented; "sorted by mse" — sorted by id · P2 (doc)
+- M8-7 · persist=True side effect; dupes on re-run; stale after `mtrain evaluate` · P2
+- M8-8 · retraining_selection computed, never consumed · P2
+- M8-9 · affected_slice always whole split · P2
+- M8-10 · thresholds not configurable · P2
+- M8-11 · integration test checks shape only; dead branches untested · P2
