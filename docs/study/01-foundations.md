@@ -133,7 +133,7 @@ requires-python = ">=3.10"
 ```
 
 - `requires-python = ">=3.10"`: the code uses `X | None` union syntax in annotations at runtime-evaluated positions (for example, Pydantic field types like `float | None` in `schema.py`). Pydantic evaluates those, so Python 3.10 is a real floor and not an arbitrary one. The README installs with 3.11 (`uv venv --python 3.11`), so 3.10 itself is **declared but never shown to have been tested**.
-- `authors` and `[project.urls] Repository = "https://github.com/kushagrathisside/VLAFinetuningExperiments"` name a person and a repository other than the checkout this manual was written from. If you present this project as yours, have a one-sentence account of the relationship (fork, collaboration, renamed), because an interviewer who opens the repo will see it.
+- `authors` and `[project.urls] Repository = "https://github.com/kushagrathisside/VLAFinetuningExperiments"` name a person and a repository other than the checkout this manual was written from. If you present this project as yours, have a one-sentence account of the relationship (fork, collaboration, renamed), because an interviewer who opens the repo will see it. (README line 298 credits the SO-100 runs to `AdityaKishore0698` and the ALOHA run to `chytra3`. See gap 11.)
 
 ```toml
 dependencies = [
@@ -314,7 +314,7 @@ The README (lines 176–177) and `docs/ARCHITECTURE.md` (lines 143–144) descri
 8. **Unused declarations.** `allow-direct-references = true` (no direct references), `pytest-cov` (never invoked), `psutil` `ImportError` fallbacks (it's a hard dependency). *Consequence:* small, but each one is a "why is this here?" you should answer as "vestigial", not invent a reason for.
 9. **The public API is wider than the wired system** (`ModelRegistry`, `DeployedModel`, `run_data_fraction_sweep`, `build_model_dataset_matrix`). *Consequence:* the package surface overstates what the pipeline actually exercises.
 10. **Undeclared direct torch dependency.** `trainer.py` and `run_dir.py` import torch, but this package never declares it. It's deliberate, delegated to the engine's extra, and the README explains it, but the metadata alone is incomplete.
-11. **The `pyproject` author and repository URL point elsewhere.** *Consequence:* you need a one-line provenance story ready.
+11. **The `pyproject` author and repository URL point elsewhere.** *Consequence:* you need a one-line provenance story ready. *Correction added during Module 3:* README line 298 states the SO-100 fine-tuning runs were performed by `AdityaKishore0698` and the ALOHA run by `chytra3`. The accurate framing is therefore a collaborative project: one author owns the codebase, you ran the SO-100 experiments and someone else ran ALOHA. Claim exactly that, and be ready for "which code did you write?".
 
 ---
 

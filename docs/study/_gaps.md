@@ -49,3 +49,19 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M2-14 · selection_metric free str; unknown metric → silent fallback to final
 - M2-15 · oversample_factor / episode_weights unbounded (≤0 accepted)
 - M2-16 · "identical test set" across baseline/extended relies on deterministic DatasetBuilder; unverified in-repo
+
+## Module 3
+- M3-1 · run_dir.py/index.py · no atomic writes (write_text truncates; buffered appends) · P1
+- M3-2 · index.py · read_all has no per-line tolerance; one torn line poisons index + ModelRegistry · P1
+- M3-3 · run_dir.py + runner order · failed run blocks same-day retry; no status/crash marker pre-trainer (= S13) · P1
+- M3-4 · run_dir.py · make_run_dir TOCTOU race; use mkdir(exist_ok=False) · P2
+- M3-5 · runner.py/run_dir.py · engine git provenance from guessed path, not rde.__file__; can be null/wrong silently · P1
+- M3-6 · run_dir.py · dirty flagged but no diff saved · P2
+- M3-7 · run_dir.py · driver_capability is compute capability; no driver/cudnn/transformers; vla-finetune version meaningless · P2
+- M3-8 · experiment_report.py · git key mismatch → n/a (= S2) · P0 (trivial)
+- M3-9 · run_dir.py · logs/ never written; no logging anywhere; engine stdout uncaptured · P2
+- M3-10 · index.py · index write-only inside system; non-transactional with run; no status → failed runs/orphan versions invisible · P2
+- M3-11 · default=str silently stringifies np.float32 etc. (unverified whether rde emits) · P2
+- M3-12 · half the artifacts bypass RunDir · P2
+- M3-13 · runs/experiments default from parents[3] → inside site-packages for wheel install (latent) · P2
+- M1-11 UPDATED: README:298 credits SO-100 runs to AdityaKishore0698, ALOHA to chytra3
