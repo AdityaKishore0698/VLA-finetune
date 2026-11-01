@@ -108,6 +108,11 @@
 | D23 | README §2 point 3: "retrieval is a strong baseline" as the explanation | plausibly under-training (≈0.11 epoch) | add the epoch arithmetic (M15-2) |
 | D24 | `plot_results.py`: "reproducible from disk" | selection markers hard-coded | read `model.json` (M10-8) |
 
+| D25 | README Table 5: "A fraction of 0.0 is honoured as zero episodes" | the builder raises on zero episodes | correct, or implement P1-13 (M4-2) |
+| D26 | README Table 5: imbalanced = "under-representation of one regime" | removes the regime entirely | correct the wording (M4-3) |
+| D27 | README §3.3: "a process killed mid-write cannot leave a corrupt 'best' model" | verification is presence-only and can't run in a killed process | downgrade (M6-9) |
+| D28 | README §2.4: "scattered ... points to a model or coverage limitation" as a finding | the only possible output at p90 with 4–5 episodes | reframe (M8-3) |
+
 **Effort:** each doc correction is XS. Together they're about 2 hours, and they buy the most credibility per minute in this whole module.
 
 ---
@@ -141,7 +146,7 @@ Chosen for **maximum change in what the project can truthfully claim, per hour**
 | 2 | **P0-2 real seed propagation** plus identity re-stamp plus a seed loop in the CLI | turns the documented multi-seed workflow from fake replicates into real ones; unlocks every variance claim | 1.5 h |
 | 3 | **P0-6 non-destructive re-scoring** (versioned rescore directory, split-named files) | stops published numbers from being overwritten; removes the doc-endorsed val-as-test footgun | 1.5 h |
 | 4 | **P1-1 predict-once slicing** | removes stochastic non-reconciliation *and* about 25–30% of each run's GPU time | 2 h |
-| 5 | **P1-15 + P1-16 + D1–D24 doc and report truthfulness pass** (git key, SmolVLA MAE, per-dimension MAE, limitations, every false doc sentence) | the cheapest credibility in the project; every reader-facing claim becomes true | 1.5 h |
+| 5 | **P1-15 + P1-16 + D1–D28 doc and report truthfulness pass** (git key, SmolVLA MAE, per-dimension MAE, limitations, every false doc sentence) | the cheapest credibility in the project; every reader-facing claim becomes true | 1.5 h |
 
 **Total: about 8 hours.** Deliberately *not* on the list despite being P0: **P0-1, the frozen test split** (1–3 days, may touch the engine), and **P0-7, the frozen validation subset** (half a day). They're the first two items of the roadmap below, not afternoon work.
 
@@ -215,7 +220,7 @@ Chosen for **maximum change in what the project can truthfully claim, per hour**
                            guard · feedback on val · non-destructive rescoring · frozen val subset
  P1 (wrong/lost/false):    predict-once · bootstrap CI · run state machine · atomic I/O · crash coverage
                            · health cross-check · coverage metric · compare by key + test-hash + seeds
-                           · report truth · 24 doc corrections · invariant/CLI tests · CI + lockfile
+                           · report truth · 28 doc corrections · invariant/CLI tests · CI + lockfile
  P2 (hygiene/scale):       ~60 items, XS–S each, scale items deferred to Module 15 triggers
  1-day shortlist:          config ▸ seeds ▸ rescoring ▸ predict-once ▸ truthfulness pass   (~8 h)
  Roadmap:                  A validity ▸ B experiments (ALOHA 5–10k steps first) ▸ C reliability
@@ -237,7 +242,7 @@ Chosen for **maximum change in what the project can truthfully claim, per hour**
 # Appendix A — Model answers to the drill
 
 **A1. The one-day list.**
-"First, make the config strict and fail fast: forbid unknown keys, use literal types for the model, metric, slice and baseline names, and check all names before the run directory is created. That closes every 'typo silently changed the run' and 'typo found after training' bug in one change. Second, make `--seed` actually set the training seed and re-stamp the experiment ID, because today replicates share a seed and any variance I report is fake. Third, make re-scoring non-destructive, so `mtrain test` can't overwrite published numbers and `--split val` can't write into a file called test. Fourth, predict once and slice the stored outcomes. That makes slices add up to the overall number and saves about a quarter of each run's GPU time. Fifth, a truthfulness pass: fix the report bugs and correct the two dozen doc sentences that don't match the code. The order goes from silent-wrong-results to lost-results to waste to credibility, and each fix comes with a test that fails before it."
+"First, make the config strict and fail fast: forbid unknown keys, use literal types for the model, metric, slice and baseline names, and check all names before the run directory is created. That closes every 'typo silently changed the run' and 'typo found after training' bug in one change. Second, make `--seed` actually set the training seed and re-stamp the experiment ID, because today replicates share a seed and any variance I report is fake. Third, make re-scoring non-destructive, so `mtrain test` can't overwrite published numbers and `--split val` can't write into a file called test. Fourth, predict once and slice the stored outcomes. That makes slices add up to the overall number and saves about a quarter of each run's GPU time. Fifth, a truthfulness pass: fix the report bugs and correct the nearly thirty doc sentences that don't match the code. The order goes from silent-wrong-results to lost-results to waste to credibility, and each fix comes with a test that fails before it."
 
 *Why that answer lands:* it's concrete, ordered by consequence with the reason stated, sized to a day, and every item has a test. That's what "prioritize" means.
 
@@ -265,7 +270,7 @@ Chosen for **maximum change in what the project can truthfully claim, per hour**
 
 # Module 16 Summary — the one page to revise
 
-**What this module is.** About 200 gap entries consolidated into 7 P0 fixes (comparability and truthfulness of results), 26 P1 fixes plus 24 doc corrections, and about 60 P2 items. Then a one-day shortlist (about 8 hours), a five-phase roadmap, and a fifteen-row anti-roadmap with flip conditions.
+**What this module is.** About 200 gap entries consolidated into 7 P0 fixes (comparability and truthfulness of results), 26 P1 fixes plus 28 doc corrections, and about 60 P2 items. Then a one-day shortlist (about 8 hours), a five-phase roadmap, and a fifteen-row anti-roadmap with flip conditions.
 
 **Five claims to make cold**
 1. The P0s are all about comparability: frozen test split, real seeds, strict config, no imbalanced no-op, val-driven feedback, non-destructive re-scoring, a frozen val subset.
@@ -279,14 +284,14 @@ Chosen for **maximum change in what the project can truthfully claim, per hour**
 | Chose | Over | Because | Cost |
 |---|---|---|---|
 | Prioritize by effect on conclusions | by ease or by module | wrong results matter most | P0s include a multi-day fix |
-| Fix docs or make them true | leave docs as aspirations | credibility per minute | 24 small edits |
+| Fix docs or make them true | leave docs as aspirations | credibility per minute | 28 small edits |
 | Validity before experiments before reliability | infrastructure first | the bottleneck order (Module 15) | reliability gaps persist for a few weeks |
 | Add an absolute gate beside the percentile | replace it | keep normalization-robust ranking | two thresholds to explain |
 | Defer scale items to triggers | build now | C9, short runs | rework later, by design |
 
 **Volunteer unprompted:** the README's three runs are pipeline validation until P0-1/2/7 land; P0-1 depends on the engine; continued training on an identical split is the robust result.
 
-**Numbers and names:** 7 P0 · 26 P1 · 24 doc corrections · ~60 P2; shortlist about 8 h (1.5 + 1.5 + 1.5 + 2 + 1.5); P0-1 effort L (1–3 days); ALOHA target 5–10k steps ≈ 0.5–1 epoch.
+**Numbers and names:** 7 P0 · 26 P1 · 28 doc corrections · ~60 P2; shortlist about 8 h (1.5 + 1.5 + 1.5 + 2 + 1.5); P0-1 effort L (1–3 days); ALOHA target 5–10k steps ≈ 0.5–1 epoch.
 
 **Sentences worth memorizing**
 - "My P0 list is about one thing: making two numbers from this system comparable."

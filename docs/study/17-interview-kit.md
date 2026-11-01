@@ -152,7 +152,7 @@ Format: **Q** · skeleton (the beats) · → pointer.
 
 **A trade-off you're unsure about.** "Putting the model adapter and its training step inside the data engine. It keeps feature shapes and normalization in lockstep with the engine's training contract, which is why cross-embodiment loading worked. But it inverts the dependency: the data layer owns the model. With one model family I think it was right. With a second I'd split adapters into their own package, and I'm not sure where the line is." (M1 §1.3)
 
-**Conflict or disagreement (if asked).** Use the docs-vs-code findings: "the docs said selection was enforced in a module that doesn't exist, and that predictions were deterministic. I treated docs as claims and verified each against the code, and corrected about two dozen." (M16 §16.3 D-table)
+**Conflict or disagreement (if asked).** Use the docs-vs-code findings: "the docs said selection was enforced in a module that doesn't exist, and that predictions were deterministic. I treated docs as claims and verified each against the code, and found nearly thirty that needed correcting." (M16 §16.3 D-table)
 
 **Failure.** "My one-day plan would have been to add MLflow. Auditing showed the runs weren't comparable, so a dashboard would only have displayed incomparable numbers more nicely. I changed the plan to fix the protocol first." (M16 A3)
 

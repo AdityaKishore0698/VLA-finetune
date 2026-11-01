@@ -77,6 +77,8 @@ if report.reviews:
 
 and that only happens if *every* flagged frame in the whole test set lands in that one episode. On ALOHA (4 episodes of 1,100 frames), it's `0.10 × 4,400 / 1,100` = **0.40**. **So "concentrated" (> 0.5) is mathematically unreachable on ALOHA and needs a perfect worst case on SO-100.** The "data defect" explanation can, in practice, never be produced here. The artifact will say "scattered → model/coverage limitation" every time. That isn't evidence. It's a consequence of choosing p90 and 0.5 together. (It's reachable only when an episode is much shorter than average, or when there are many episodes and one is truly anomalous.)
 
+**Confirmed by the README's own numbers (added during the Data Provenance module).** README §2.4 reports that on the 2,000-step SO-100 run the p90 rule flags **191 of 1,908** test frames (that's 10.0%, as the arithmetic predicts), "every test episode contains some of them", and **no episode exceeds 13.8%** (range 6.5–13.8%), so the artifact says "scattered". On ALOHA, 440 of 4,400 are flagged, and the worst episodes reach 22.6% and 12.1%. Both datasets sit far below the 0.5 cut, exactly as the bound says they must. The README presents "scattered → model or coverage limitation" as a *finding*. It's the only output these thresholds can produce at these sizes.
+
 **The two thresholds should be expressed relative to each other.** For example, call an episode concentrated if its failure rate exceeds k× the expected base rate of `(100 − p)/100`, or test it with a binomial test against that base rate. That's the one-line fix that makes both branches reachable.
 
 ### The recommendation is a template
