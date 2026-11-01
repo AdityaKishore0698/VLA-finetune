@@ -154,3 +154,21 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M9-10 · test_deployment.py · health-check tests pass empty safetensors + mismatched meta (encodes presence-only) · P2
 - M9-11 · registry "most recent wins" untested · P2
 - M9-12 · LatencyBreakdown.note names VisionStateAdapter, class uses VisionLanguageAdapter · P2 (trivial)
+
+## Module 10
+- M10-1 · experiment_report.py:93 · git(model_training) always n/a (= S2/M3-8) · P0 trivial
+- M10-2 · experiment_report.py docstring · "assembled from saved artifacts" — built from in-memory ctx; no rebuild path; timestamped · P2 → add build_report_ctx(run_dir) + `mtrain report`
+- M10-3 · experiment_report.py:22 · per-dimension MAE (list) dropped from report · P2
+- M10-4 · experiment_report.py:112 · SmolVLA MAE hard-coded n/a · P2 trivial
+- M10-5 · comparison.py · no seed aggregation (EXPERIMENTS.md §7 claims mean/std) · P1
+- M10-6 · comparison.py · no shared-test-set check/column · P1
+- M10-7 · cli.py compare · rich table headers from rows[0], positional cells; rich adds headerless columns → silent misalignment (verified rich source) · P1
+- M10-8 · plot_results.py · selected_step 1800/800, offset 1000, LR text, ylims hard-coded; docstring "reproducible from disk" · P2
+- M10-9 · build_model_dataset_matrix / plot_model_comparison / plot_data_fraction_curve uncalled; matrix pivots on unique training_version · P2
+- M10-10 · figures.py:12 · matplotlib.use("Agg") at import → global side effect (notebooks) · P2
+- M10-11 · model_card · "Known failure modes" = template; names unexecuted DeployedModel; raw-float metrics · P2
+- M10-12 · rebalanced + best→final fallback limitations never added to report · P1
+- M10-13 · figures.plot_training_curves r["loss"] unguarded → plot KeyError aborts run after training · P2
+- M10-14 · manifest.json read never written; missing files → None rows silently (= S12) · P2
+- M10-15 · `None` printed for selected checkpoint in baseline-only report · P2 trivial
+- M10-16 · no unit tests for reports package · P1
