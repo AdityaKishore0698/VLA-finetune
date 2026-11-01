@@ -172,3 +172,21 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M10-14 · manifest.json read never written; missing files → None rows silently (= S12) · P2
 - M10-15 · `None` printed for selected checkpoint in baseline-only report · P2 trivial
 - M10-16 · no unit tests for reports package · P1
+
+## Module 11
+- M11-1 · runner.py:73 · seed → dir name + summary only; replicates share training.seed AND experiment_id → fake replicates, model_id collision (= S1) · P0
+- M11-2 · runner.py:172/191 · unknown baseline/slice names raise AFTER training · P0 (fail-fast) · fix: Literal/stage-0 check
+- M11-3 · runner.py · non-transactional across run dir / engine catalog / index / engine failure records; no status · P1
+- M11-4 · runner.py:~225 · record_model before feedback & before model_artifact.json written · P2
+- M11-5 · evaluation.split="val" silently relabels "test" reports · P2
+- M11-6 · no GPU guard (CPU SmolVLA runs proceed) · P2
+- M11-7 · summary/experiments.jsonl omit NN baseline; no total run time · P2
+- M11-8 · predictions run_id = absolute path · P2
+- M11-9 · no stage-level resume/caching · P2 (roadmap)
+- M11-10 · data_fraction.py · each fraction different test set; non-nested; "isolates quantity" docstring false · P1
+- M11-11 · data_fraction.py · aborts on first failure (0.0 always fails), results lost; persist incrementally · P1
+- M11-12 · data_fraction.py · name collision (_frac12), base intervention discarded, garbled docstring · P2
+- M11-13 · sweep untested, no CLI · P1
+- M11-14 · eval from_checkpoint ignores training.device; eval policy not released · P2
+- M11-15 · same view as train & val; two-view seam unused · note
+- PATCHED M1 table: run_data_fraction_sweep has no tests

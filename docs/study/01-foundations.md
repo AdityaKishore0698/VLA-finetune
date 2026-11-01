@@ -272,7 +272,7 @@ __all__ = ["DeployedModel", "DeploymentHealthError", "LatencyBreakdown",
 |---|---|---|
 | `deployment.ModelRegistry` | **no** (the runner writes models via `ExperimentIndex.record_model`, not the registry) | yes, `test_deployment.py` |
 | `deployment.DeployedModel` | **no** (only named in a model-card string) | yes |
-| `experiments.run_data_fraction_sweep` | **no** (no CLI command calls it) | needs checking in Module 13 |
+| `experiments.run_data_fraction_sweep` | **no** (no CLI command calls it) | **no** (verified in Module 11: no test references it) |
 | `reports.build_model_dataset_matrix` | **no** | no |
 
   These are covered properly in Modules 9, 10 and 11. For now the point is that **the public API is wider than the wired system.**
