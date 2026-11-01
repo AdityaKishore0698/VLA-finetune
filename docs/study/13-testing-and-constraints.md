@@ -183,7 +183,7 @@ Each row traces a non-obvious choice to the **named constraint that forced it**,
 
 | Decision (module) | Forced by | How the constraint forces it | Would flip when |
 |---|---|---|---|
-| Batch size 4, 1,000 steps, no grad accumulation (M2) | **C1** | 8 GB VRAM for a ~450M-param VLA plus 2–4 cameras | larger GPU, or multi-GPU |
+| Batch size 4, 1,000 steps, no grad accumulation (M2) | **C1** (motivated, but see note) | 8 GB VRAM for a ~450M-param VLA plus 2–4 cameras. *Correction from Module 15:* measured peak GPU is only 2.2–3.0 GB of 8 GB, so batch 4 is conservative rather than forced, and 1,000 steps is about 0.26 (SO-100) or 0.11 (ALOHA) of an epoch | larger GPU, or multi-GPU; or simply trying batch 8–16, which the measurements suggest fits |
 | Validation capped at `val_batches × batch_size` = 32 frames (M6) | **C1, C9** | a full val pass (~90 s) × 10 would triple a ~5-minute run | longer runs make validation relatively cheap; use a frozen stratified subset regardless |
 | `del policy; empty_cache()` before the evaluation load (M6) | **C1** | two SmolVLA copies don't fit in 8 GB | GPU with headroom |
 | No optimizer state in checkpoints (M6) | **C1** (disk), inferred | Adam moments about triple checkpoint size | preemptible long runs need exact resume |

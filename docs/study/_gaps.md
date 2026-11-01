@@ -220,3 +220,14 @@ Format: ID · module · file · gap · consequence · status (verified / unverif
 - M13-8 · smoke asserts existence not value sanity in eval · P2
 - M13-9 · smoke imports private rde functions (= M1-4) · P2
 - CAPSTONE written in 13.6
+
+## Module 15 (HLD)
+- M15-1 · eval ≈45% (SO-100) / ≈57% (ALOHA) of run time, ~half redundant (derived) · ties to M7-1 · P1
+- M15-2 · runs see ≈0.26 / ≈0.11 epoch (per-frame assumption) → ALOHA NN loss plausibly under-training; README framing understates · P1 (claim reframe + next experiment)
+- M15-3 · batch 4 uses 2.2–3.0/8 GB → batch conservative, not forced (unverified larger fits) · P2
+- M15-4 · disk first physical limit (4–9 GB/run est.); no retention policy beyond keep-3 + dup final · P2
+- M15-5 · no caching despite immutable versions (builds, baselines, profile, predictions) · P2
+- M15-6 · no quality observability metrics (test-set hash, NN ratio, CI, val–test gap, epochs seen) · P1
+- M15-7 · single-tenant (global names, no user field) · P2 (until 100×)
+- M15-8 · data loading/decode never measured · P2
+- CAPSTONE NOTE: C1 row (batch 4 forced by 8 GB) softened — measurements show slack; see M15-3
